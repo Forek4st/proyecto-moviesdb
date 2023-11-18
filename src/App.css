@@ -1,55 +1,53 @@
 .card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  .card-container {
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-    
-   
-  }
-  
-  .col {
-    width: 15%;
-    box-sizing: border-box;    
-    margin: 30px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  
-  
-  .card-container .card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center; 
+}
 
- .card-body{
-    margin-top: 15px;
-    font-size: 20px;
-    text-align: center;
- }
+.card-container {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
- .card-container img {
-    width: 100%;
-    height: auto; /* Ajusta la altura automáticamente */
-    cursor: pointer;
-    transition: transform 0.3s ease; /* Agrega transición para un efecto suave */
-  }
-  
-  .card-container img:hover {
-    transform: scale(1.05); /* Aumenta la escala al 110% en hover */
-  }
+.col {
+  width: 15%;
+  box-sizing: border-box;
+  margin: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
 
-.card-container row{
-    margin-top: 0px;
+.card-container .card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease; 
+}
+
+.card-container .card:hover {
+  transform: scale(1.05); 
+}
+
+.card-body {
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid transparent;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(#000eff);
+}
+
+.card-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.card-container row {
+  margin-top: 0px;
 }

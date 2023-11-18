@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+
 const API_KEY = "faa79a51fcacae083dd37b6815606a4a";
 const items = 5;
 
@@ -85,7 +86,7 @@ const CardComponent = () => {
         onClick={handlePrevItems}
         disabled={startIndex === 0}
       >
-        <img src="https://img.icons8.com/ios/50/000000/long-arrow-left.png" alt="" />
+       Atrás
       </Button>
       <Row className="card-container">{renderMovieCards()}</Row>
       
@@ -94,7 +95,7 @@ const CardComponent = () => {
           onClick={handleNextItems}
           disabled={startIndex + items >= moviesData.length}
         >
-          <img src="https://img.icons8.com/ios/50/000000/long-arrow-right.png" alt="" />
+          Adelante
         </Button>
       
     </div>
