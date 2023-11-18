@@ -1,0 +1,15 @@
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Otra opción: justify-content: space-around; */
+  }
+  
+  .card-container {
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  }
+  
+  .card-container .col-md-3 {
+    width: calc(25% - 20px); /* Calcula el ancho de cada columna con espacio entre ellas */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }

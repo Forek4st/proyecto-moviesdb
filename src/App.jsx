@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
      {/*  <Landing /> */}
-     {/*  <Card /> */}
+      <Card />
      {/* <MovieDescription /> */}
     </>
   );

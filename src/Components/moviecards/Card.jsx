@@ -1,18 +1,72 @@
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-export default function CardComponent() {
+const API_KEY = 'faa79a51fcacae083dd37b6815606a4a';
+
+const CardComponent = () => {
+  const [moviesData, setMoviesData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es`);
+        const genreResponse = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es`);
+
+        const [movieData, genreData] = await Promise.all([movieResponse.json(), genreResponse.json()]);
+
+        const movies = movieData.results.slice(0, 40).map((movie) => {
+          const movieGenre = movie.genre_ids.map((genreId) =>
+            genreData.genres.find((genre) => genre.id === genreId)?.name
+          );
+
+          return {
+            title: movie.title,
+            resumen: movie.overview,
+            imgMovie: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+            release_date: movie.release_date,
+            genre: movieGenre.join(', '),
+          };
+        });
+
+        setMoviesData(movies);
+      } catch (error) {
+        console.error('Error obteniendo datos de las películas:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const renderMovieCards = () => {
+    return moviesData.map((movie, index) => (
+      <Col key={index} md={3} style={{ marginBottom: '20px' }}>
+        <Card>
+          <Card.Img variant="top" src={movie.imgMovie} alt={movie.title} />
+          <Card.Body>
+            <Card.Title id={`card-title-${index}`}>{`Título: ${movie.title}`}</Card.Title>
+            <Card.Subtitle className="mb-2" id={`card-release-date-${index}`}>
+              {`Fecha de Lanzamiento: ${movie.release_date}`}
+            </Card.Subtitle>
+            <Card.Subtitle className="mb-2" id={`card-genre-${index}`}>
+              {`Género: ${movie.genre}`}
+            </Card.Subtitle>
+            <Button variant="primary">Descripción</Button>
+          </Card.Body>
+        </Card>
+      </Col>
+    ));
+  };
+
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://a.cdn-hotels.com/gdcs/production24/d1493/38448f6b-50cb-4edb-ba1b-41e72a2d0db7.jpg?impolicy=fcrop&w=800&h=533&q=medium" />
-      <Card.Body>
-        <Card.Title id='card-title'>Card Title</Card.Title>
-        <Card.Text id='card-text'>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+    <div className='row card-wrapper'>
+      <Row className="col card-container">
+        {renderMovieCards()}
+      </Row>
+    </div>
   );
-  }
+};
+
+export default CardComponent;
